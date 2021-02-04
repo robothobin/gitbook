@@ -1,0 +1,127 @@
+
+@startuml
+
+title: GSM框架
+ 
+package "终端" {
+    ["手机1"]
+    ["手机2"]
+    ["手机3"]
+}
+package "BSS基站子系统1" {
+    ["BTS1"] <--> ["BSC1"]
+    ["BTS2"] <--> ["BSC1"]: Abis接口
+    ["BTS3"] <--> ["BSC1"]
+}
+
+package "BSS基站子系统2" {
+    ["BSC2"]
+}
+
+package "NSS网络子系统" {
+    ["MSC/VLR"] <-->["SC"]
+    ["MSC/VLR"] <-->["HLR/AUC"]
+    ["MSC/VLR"] <-->["EIR"]
+}
+
+["手机1"] <--> ["BTS1"]:Um 空口
+["手机2"] <--> ["BTS1"]
+["手机3"] <--> ["BTS1"]
+
+["BSC1"] <--> ["MSC/VLR"]: A口
+["BSC2"] <--> ["MSC/VLR"]
+note left: ISDN/PLMN/PSTN/PSPDN
+
+
+' node "组件2" {
+'     ["组件2.1"] - ["组件2.2"]
+'     ["组件2.2"] --> [负载均衡服务器]
+' }
+ 
+' cloud {
+'     [负载均衡服务器] -> [逻辑服务器1]
+'     [负载均衡服务器] -> [逻辑服务器2]
+'     [负载均衡服务器] -> [逻辑服务器3]
+' }
+ 
+' database "MySql" {
+'     folder "This is my folder" {
+'         [Folder 3]
+'     }
+ 
+'     frame "Foo" {
+'         [Frame 4]
+'     }
+' }
+ 
+' [逻辑服务器1] --> [Folder 3]
+' [逻辑服务器2] --> [Frame 4]
+' [逻辑服务器3] --> [Frame 4]
+ 
+@enduml
+
+' package
+' node
+' cloud
+' database
+
+@startuml
+
+title: GSM逻辑信道
+
+== 开机 ==
+
+MS <- BTS: FCCH,频率校正
+MS <- BTS: SCH, 同步TDMA帧号等
+MS <- BTS: BCCH,广播小区频点、LAI等
+
+== 空闲 == 
+MS <- BTS: PCH, paging, 寻呼
+MS -> BTS: RACH, 接入请求专用信道
+MS <- BTS: AGCH, 分配专用信道
+
+== 专用模式 == 
+MS <-> BTS: SDCCH, 呼叫建立，为分配TCH前传短消息
+MS <-> BTS: TCH, 通话
+MS <- BTS: SACCH, 慢速随路控制，短信
+MS <- BTS: FACCH, 快速随路控制
+
+@enduml
+
+@startuml
+
+title: GPRS框架
+ 
+package "终端" {
+    ["手机1"]
+    ["手机2"]
+    ["手机3"]
+}
+package "BSS基站子系统1" {
+    ["BTS"] <--> ["BSC"]: Abis接口
+    ["BTS"] <--> ["PCU"]: Abis接口
+}
+
+package "NSS网络子系统" {
+    ["MSC/VLR"] <-->["SC"]
+    ["MSC/VLR"] <-->["HLR/AUC"]
+    ["MSC/VLR"] <-->["EIR"]
+    ["SGSN"]
+}
+
+cloud {
+    ["Internet"]
+}
+
+["手机1"] <--> ["BTS"]:Um 空口
+["手机2"] <--> ["BTS"]
+["手机3"] <--> ["BTS"]
+
+["BSC"] <--> ["MSC/VLR"]: A口
+["PCU"] <--> ["SGSN"]:Gb
+
+["SGSN"] <--> ["GGSN"]
+["GGSN"] <--> ["Internet"]
+
+
+@enduml

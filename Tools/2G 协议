@@ -1,0 +1,17 @@
+pic1 GSM系统组成图，BTS,BSC,MSC...每个组件的功能
+pic2 物理信道：频率，频点，全双工，终端发送接收功率，FDD, TDD
+pic3 逻辑信道
+pic4 工作流程图
+
+分组回话流程https://blog.csdn.net/zhuyiquan/article/details/52759930
+http://blog.sina.com.cn/s/blog_771eed6f0100tbqy.html
+
+DTM ：Dual Transfer Mode，双重传输模式。 DTM是GSM/GPRS/EDGE向UMTS演进的一个关键技术，除了与网络有关外，还与手机终端有关。
+
+现阶段商用的手机一般都是Class B或者Class C。
+
+网络开启DTM后，Class B能同时连接到GSM和GPRS系统，可提供GPRS分组业务和GSM电路交换业务，但是两者不能同时工作，在某一时刻，进行数据传输过程中可以接受GSM寻呼信息，这时用户可以选择暂停数据传输而接听电话，或者拒绝接听电话而继续数据传输。
+
+Class C只能轮流使用GSM电路交换业务和GPRS分组业务，通过人工操作来进行业务转换，这就意味着如果用户选择GPRS模式，将不能接受GSM呼叫请求。
+https://wenku.baidu.com/view/06705662b94ae45c3b3567ec102de2bd9605de24.html
+http://www.360doc.com/content/10/0602/15/496343_30864669.shtml
